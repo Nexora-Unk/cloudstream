@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CloudStream · Guía de instalación Nexora</title>
+<style>
+:root{--bg:#0b0d14;--card:#151826;--line:#262b40;--tx:#eef0f8;--mu:#9aa1bd;--ac:#7c5cff;--ac2:#22d3ee;--ok:#34d399;--warn:#fbbf24;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#f4f5fb;--card:#fff;--line:#dfe2f0;--tx:#161a2b;--mu:#5d647f}}
+:root[data-theme="dark"]{--bg:#0b0d14;--card:#151826;--line:#262b40;--tx:#eef0f8;--mu:#9aa1bd}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.5}
+.w{max-width:640px;margin:0 auto;padding:20px 16px 48px}
+h1{font-size:1.6rem;margin:8px 0 4px;background:linear-gradient(90deg,var(--ac),var(--ac2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{color:var(--mu);margin:0 0 18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin:14px 0}
+.card h2{font-size:1rem;margin:0 0 6px;display:flex;gap:10px;align-items:center}
+.n{background:var(--ac);color:#fff;border-radius:50%;width:26px;height:26px;display:inline-grid;place-items:center;font-size:.85rem;flex:none}
+.card p{margin:4px 0 12px;color:var(--mu);font-size:.92rem}
+.btn{display:block;width:100%;text-align:center;text-decoration:none;border:0;cursor:pointer;font:inherit;font-weight:600;padding:13px;border-radius:12px;color:#fff;background:linear-gradient(90deg,var(--ac),var(--ac2))}
+.btn.sec{background:transparent;color:var(--tx);border:1px solid var(--line);margin-top:8px}
+.warn{display:none;background:rgba(251,191,36,.12);border:1px solid var(--warn);color:var(--warn);border-radius:12px;padding:10px 12px;font-size:.88rem;margin:10px 0}
+.note{background:rgba(124,92,255,.12);border:1px solid var(--ac);border-radius:12px;padding:10px 12px;font-size:.9rem;margin:0 0 10px;color:var(--tx)}
+/* Banner de descarga */
+.banner{position:relative;display:flex;align-items:flex-end;min-height:170px;border-radius:14px;overflow:hidden;text-decoration:none;color:#fff;background:linear-gradient(135deg,var(--ac),var(--ac2)) center/cover no-repeat}
+.banner::before{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.72),rgba(0,0,0,.05) 70%)}
+.banner span{position:relative;padding:14px 16px;font-weight:700;font-size:1.15rem;display:block;width:100%;text-align:center}
+.banner small{display:block;font-weight:400;opacity:.85;font-size:.8rem}
+/* Repos */
+.ext{display:block;padding:12px;border:1px solid var(--line);border-radius:12px;margin-top:8px}
+.ext.done{border-color:var(--ok)}
+.ext button.main{all:unset;cursor:pointer;display:flex;gap:12px;align-items:center;width:100%}
+.ext .ck{width:24px;height:24px;border-radius:50%;border:2px solid var(--line);display:grid;place-items:center;flex:none;font-size:.8rem;color:transparent}
+.ext.done .ck{background:var(--ok);border-color:var(--ok);color:#04130c}
+.ext b{display:block}.ext span{color:var(--mu);font-size:.8rem}
+.ext a{display:inline-block;margin-top:8px;font-size:.82rem;color:var(--ac2)}
+.bar{height:8px;background:var(--line);border-radius:8px;overflow:hidden;margin-top:12px}
+.bar i{display:block;height:100%;width:0;background:var(--ok);transition:width .3s}
+ol{margin:0;padding-left:20px;color:var(--mu);font-size:.92rem}ol li{margin:6px 0}
+ol b,.note b{color:var(--tx)}
+.rec{border:1px solid var(--ok);background:rgba(52,211,153,.1);border-radius:12px;padding:12px;margin-top:12px;font-size:.92rem}
+.admin{display:none}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ok);color:#04130c;padding:10px 16px;border-radius:10px;font-weight:600;opacity:0;pointer-events:none;transition:.25s;max-width:90%;text-align:center}
+.toast.on{opacity:1}
+small.mu{color:var(--mu)}
+</style>
+</head>
+<body>
+<div class="w">
+  <h1>CloudStream · Guía de instalación</h1>
+  <p class="sub">Déjalo listo en 3 pasos. Solo Android y Android TV.</p>
+  <div class="warn" id="warn">⚠️ Parece que no estás en Android. Abre esta página desde tu celular o TV Android.</div>
+
+  <div class="card">
+    <h2><span class="n">1</span>Descargar CloudStream</h2>
+    <p>Aprieta el banner para ir a la descarga de la app e instálala.</p>
+    <a class="banner" id="banner" href="#" target="_blank" rel="noopener"><span>⬇️ Apreta para descargar<small>CloudStream para Android</small></span></a>
+    <div class="admin" id="admin">
+      <p style="margin-top:12px">Modo edición: elige la imagen del banner.</p>
+      <input type="file" id="img" accept="image/*">
+      <button class="btn sec" id="copyImg">Copiar imagen en base64 (pégala en CONFIG.bannerImage)</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2><span class="n">2</span>Instalar las extensiones</h2>
+    <div class="note">⚠️ Instala <b>todos los repositorios</b> que tengan la bandera de <b>México 🇲🇽</b> y de <b>España 🇪🇸</b>.</div>
+    <p>Toca cada repositorio: se copia automáticamente su <b>nombre y la URL del json</b>. Luego en CloudStream ve a <b>Ajustes → Extensiones → Agregar repositorio</b> y pega.</p>
+    <div id="list"></div>
+    <div class="bar"><i id="fill"></i></div>
+    <p id="prog" style="margin:8px 0 0"></p>
+  </div>
+
+  <div class="card">
+    <h2><span class="n">3</span>Elegir un proveedor</h2>
+    <ol>
+      <li>Abre CloudStream y ve a la pantalla de <b>Inicio</b>.</li>
+      <li>Toca el <b>selector de proveedor</b> (arriba, donde aparece el nombre del proveedor actual).</li>
+      <li>Elige un proveedor de la lista. Solo aparecen los de las extensiones que instalaste.</li>
+      <li>Si no ves los de español, entra a <b>Ajustes → Proveedores</b> y activa el idioma Español / Latino.</li>
+    </ol>
+    <div class="rec">⭐ <b>Mi recomendación: FlixLatam.</b> Búscalo en la lista de proveedores y selecciónalo.</div>
+    <button class="btn sec" id="reset">Reiniciar progreso</button>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ===== CONFIGURA AQUÍ ===== */
+var CONFIG = {
+  downloadUrl: "https://github.com/recloudstream/cloudstream/releases/latest",
+  bannerImage: "", // URL de imagen (funciona en tu hosting) o data:image/...;base64,... (funciona en cualquier lado)
+  repos: [
+    {name:"cs-karma", url:"https://raw.githubusercontent.com/Kraptor123/cs-Karma/refs/heads/master/repo.json"},
+    {name:"Storm-ext Fork by redblacker8", url:"https://raw.githubusercontent.com/redblacker8/storm-ext/refs/heads/builds/repo.json"},
+    {name:"Phisher Repo", url:"https://raw.githubusercontent.com/phisher98/cloudstream-extensions-phisher/refs/heads/builds/repo.json"}
+  ]
+};
+/* ========================== */
+var KEY="nexora-cs-progress", IMG="nexora-cs-banner";
+function get(k){ try{return localStorage.getItem(k);}catch(e){return null;} }
+function set(k,v){ try{localStorage.setItem(k,v);}catch(e){} }
+var state={}; try{ state=JSON.parse(get(KEY)||"{}"); }catch(e){}
+
+var banner=document.getElementById("banner");
+banner.href=CONFIG.downloadUrl;
+function setImg(src){ if(src) banner.style.backgroundImage='url("'+src+'")'; }
+setImg(CONFIG.bannerImage || get(IMG));
+
+if(!/android/i.test(navigator.userAgent)) document.getElementById("warn").style.display="block";
+
+function toast(t){ var e=document.getElementById("toast"); e.textContent=t; e.classList.add("on"); setTimeout(function(){e.classList.remove("on");},2000); }
+function copy(text,msg){
+  function fb(){ var t=document.createElement("textarea"); t.value=text; document.body.appendChild(t); t.select(); try{document.execCommand("copy");}catch(e){} t.remove(); toast(msg); }
+  if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(text).then(function(){toast(msg);},fb); } else fb();
+}
+
+function render(){
+  var list=document.getElementById("list"); list.innerHTML=""; var n=0;
+  CONFIG.repos.forEach(function(r,i){
+    var on=!!state[i]; if(on) n++;
+    var box=document.createElement("div"); box.className="ext"+(on?" done":"");
+    var btn=document.createElement("button"); btn.className="main";
+    btn.innerHTML='<div class="ck">✓</div><div><b></b><span></span></div>';
+    btn.querySelector("b").textContent=r.name;
+    btn.querySelector("span").textContent=on?"Copiado ✓ · toca para copiar de nuevo":"Toca para copiar nombre + URL";
+    btn.onclick=function(){ state[i]=true; set(KEY,JSON.stringify(state)); copy(r.name+"\n"+r.url,"Copiado: "+r.name); render(); };
+    var a=document.createElement("a"); a.href="cloudstreamrepo://"+r.url.replace(/^https?:\/\//,""); a.textContent="Abrir directo en CloudStream ›";
+    box.appendChild(btn); box.appendChild(a); list.appendChild(box);
+  });
+  var t=CONFIG.repos.length;
+  document.getElementById("fill").style.width=(n/t*100)+"%";
+  document.getElementById("prog").textContent=n+" de "+t+" repositorios copiados"+(n===t?" 🎉":"");
+}
+document.getElementById("reset").onclick=function(){ state={}; set(KEY,"{}"); render(); };
+render();
+
+/* Modo edición: agrega #editar a la URL */
+if(location.hash==="#editar"){
+  document.getElementById("admin").style.display="block";
+  var cur="";
+  document.getElementById("img").onchange=function(e){
+    var f=e.target.files[0]; if(!f) return;
+    var rd=new FileReader(); rd.onload=function(){ cur=rd.result; setImg(cur); set(IMG,cur); toast("Imagen aplicada"); }; rd.readAsDataURL(f);
+  };
+  document.getElementById("copyImg").onclick=function(){ if(cur) copy(cur,"Base64 copiado"); else toast("Primero elige una imagen"); };
+}
+</script>
+</body>
+</html>
